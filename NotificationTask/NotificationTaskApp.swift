@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct NotificationTaskApp: App {
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView{
+                ContentView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .environmentObject(ViewModel())
+            }
         }
     }
 }

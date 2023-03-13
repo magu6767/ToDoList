@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B08A75029A5ACE300E3C538 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A74E29A5ACE300E3C538 /* CoreDataModel.xcdatamodeld */; };
+		1B08A75329A5ADAA00E3C538 /* TaskData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A75129A5ADAA00E3C538 /* TaskData+CoreDataClass.swift */; };
+		1B08A75429A5ADAA00E3C538 /* TaskData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A75229A5ADAA00E3C538 /* TaskData+CoreDataProperties.swift */; };
+		1B08A75629A5ADD300E3C538 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A75529A5ADD300E3C538 /* Persistence.swift */; };
+		1B08A75829A5AE0700E3C538 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A75729A5AE0700E3C538 /* ViewModel.swift */; };
+		1B08A75A29A5AE4B00E3C538 /* SetTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A75929A5AE4B00E3C538 /* SetTimeView.swift */; };
+		1B08A75C29A5AE6000E3C538 /* SetTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A75B29A5AE6000E3C538 /* SetTaskView.swift */; };
+		1B08A75E29A5AE7A00E3C538 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08A75D29A5AE7A00E3C538 /* RowView.swift */; };
 		1B9B67C72991192100142245 /* NotificationTaskApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B67C62991192100142245 /* NotificationTaskApp.swift */; };
 		1B9B67C92991192100142245 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B67C82991192100142245 /* ContentView.swift */; };
 		1B9B67CB2991192500142245 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9B67CA2991192500142245 /* Assets.xcassets */; };
@@ -14,6 +22,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B08A74F29A5ACE300E3C538 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		1B08A75129A5ADAA00E3C538 /* TaskData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1B08A75229A5ADAA00E3C538 /* TaskData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1B08A75529A5ADD300E3C538 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		1B08A75729A5AE0700E3C538 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		1B08A75929A5AE4B00E3C538 /* SetTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimeView.swift; sourceTree = "<group>"; };
+		1B08A75B29A5AE6000E3C538 /* SetTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTaskView.swift; sourceTree = "<group>"; };
+		1B08A75D29A5AE7A00E3C538 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
+		1B90767529A9174400FBD7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1B9B67C32991192100142245 /* NotificationTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B9B67C62991192100142245 /* NotificationTaskApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTaskApp.swift; sourceTree = "<group>"; };
 		1B9B67C82991192100142245 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +52,8 @@
 		1B9B67BA2991192100142245 = {
 			isa = PBXGroup;
 			children = (
+				1B08A75129A5ADAA00E3C538 /* TaskData+CoreDataClass.swift */,
+				1B08A75229A5ADAA00E3C538 /* TaskData+CoreDataProperties.swift */,
 				1B9B67C52991192100142245 /* NotificationTask */,
 				1B9B67C42991192100142245 /* Products */,
 			);
@@ -51,8 +70,15 @@
 		1B9B67C52991192100142245 /* NotificationTask */ = {
 			isa = PBXGroup;
 			children = (
+				1B90767529A9174400FBD7EF /* Info.plist */,
 				1B9B67C62991192100142245 /* NotificationTaskApp.swift */,
 				1B9B67C82991192100142245 /* ContentView.swift */,
+				1B08A75B29A5AE6000E3C538 /* SetTaskView.swift */,
+				1B08A75929A5AE4B00E3C538 /* SetTimeView.swift */,
+				1B08A75D29A5AE7A00E3C538 /* RowView.swift */,
+				1B08A75729A5AE0700E3C538 /* ViewModel.swift */,
+				1B08A74E29A5ACE300E3C538 /* CoreDataModel.xcdatamodeld */,
+				1B08A75529A5ADD300E3C538 /* Persistence.swift */,
 				1B9B67CA2991192500142245 /* Assets.xcassets */,
 				1B9B67CC2991192500142245 /* Preview Content */,
 			);
@@ -137,8 +163,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B08A75329A5ADAA00E3C538 /* TaskData+CoreDataClass.swift in Sources */,
+				1B08A75E29A5AE7A00E3C538 /* RowView.swift in Sources */,
+				1B08A75C29A5AE6000E3C538 /* SetTaskView.swift in Sources */,
 				1B9B67C92991192100142245 /* ContentView.swift in Sources */,
+				1B08A75A29A5AE4B00E3C538 /* SetTimeView.swift in Sources */,
 				1B9B67C72991192100142245 /* NotificationTaskApp.swift in Sources */,
+				1B08A75629A5ADD300E3C538 /* Persistence.swift in Sources */,
+				1B08A75429A5ADAA00E3C538 /* TaskData+CoreDataProperties.swift in Sources */,
+				1B08A75029A5ACE300E3C538 /* CoreDataModel.xcdatamodeld in Sources */,
+				1B08A75829A5AE0700E3C538 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -270,16 +304,22 @@
 				DEVELOPMENT_TEAM = XU74GKY8PX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationTask/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ToDo;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hideto.NotificationTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -299,16 +339,22 @@
 				DEVELOPMENT_TEAM = XU74GKY8PX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationTask/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ToDo;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hideto.NotificationTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -339,6 +385,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1B08A74E29A5ACE300E3C538 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1B08A74F29A5ACE300E3C538 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 1B08A74F29A5ACE300E3C538 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1B9B67BB2991192100142245 /* Project object */;
 }
