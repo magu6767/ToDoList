@@ -12,7 +12,7 @@ import CoreData
 class ViewModel: ObservableObject {
     @Published var shareTaskData: TaskData!
     @Published var createdAt =  Date()
-    @Published var daySelection = "なし"
+    @Published var selectedDay = "なし"
     @Published var titleText = ""
     @Published var today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
     //全てのタスク
