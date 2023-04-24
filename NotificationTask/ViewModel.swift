@@ -25,8 +25,8 @@ class ViewModel: ObservableObject {
     func saveData(context: NSManagedObjectContext) {
         let newData = TaskData(context: context)
         newData.titleText = titleText
-        newData.deadline = Calendar.current.date(byAdding: .day, value: selectByAdding(day: daySelection), to: Date())
-        newData.daySelection = daySelection
+        newData.deadline = Calendar.current.date(byAdding: .day, value: selectByAdding(day: selectedDay), to: Date())
+        newData.selectedDay = selectedDay
         newData.createdAt = createdAt
         try? context.save()
     }
@@ -79,7 +79,7 @@ class ViewModel: ObservableObject {
 struct TaskDataModel: Identifiable {
     var id =  UUID()
     @State var createdAt: Date
-    @State var daySelection: String
+    @State var selectedDay: String
     @State var titleText: String
     @State var deadline: Date
 }
