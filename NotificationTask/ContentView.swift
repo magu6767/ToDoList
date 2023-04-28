@@ -18,7 +18,7 @@ struct ContentView: View {
     @State var today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
     @State var titleText = ""
     @State var deleteIndex = Int.max
-    @State var daySelection = "なし"
+    @State var selectedDay = "なし"
     @State var checkFlag = false
     //レビュー依頼,フラグ
     @Environment(\.requestReview) var requestReview
@@ -70,7 +70,7 @@ struct ContentView: View {
                     .onTapGesture {
                         deleteIndex = index
                         titleText = TaskData[index].wrappedTitleText
-                        daySelection = TaskData[index].wrappedSelectedDay
+                        selectedDay = TaskData[index].wrappedDaySelection
                         self.isSetTaskShow.toggle()
                     }
                 }
@@ -81,9 +81,8 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         //新規作成
-                        daySelection = "なし"
+                        selectedDay = "なし"
                         titleText = ""
-                        deleteIndex = Int.max
                         self.isSetTaskShow.toggle()
                     }, label: {
                         Image(systemName: "plus.circle.fill")
@@ -97,7 +96,7 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $isSetTaskShow){
-            SetTaskView(titleText: $titleText, deleteIndex: $deleteIndex, selectedDay: $daySelection)
+            SetTaskView(titleText: $titleText, deleteIndex: $deleteIndex, selectedDay: $selectedDay)
                 //モーダルをどこまで表示させるか指定
                 .presentationDetents([.fraction(0.20)])
         }

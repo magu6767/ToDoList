@@ -79,7 +79,7 @@ class ViewModel: ObservableObject {
 struct TaskDataModel: Identifiable {
     var id =  UUID()
     @State var createdAt: Date
-    @State var daySelection: String
+    @State var selectedDay: String
     @State var titleText: String
     @State var deadline: Date
 }
