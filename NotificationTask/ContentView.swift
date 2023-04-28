@@ -70,7 +70,7 @@ struct ContentView: View {
                     .onTapGesture {
                         deleteIndex = index
                         titleText = TaskData[index].wrappedTitleText
-                        daySelection = TaskData[index].wrappedDaySelection
+                        daySelection = TaskData[index].wrappedSelectedDay
                         self.isSetTaskShow.toggle()
                     }
                 }
@@ -83,6 +83,7 @@ struct ContentView: View {
                         //新規作成
                         daySelection = "なし"
                         titleText = ""
+                        deleteIndex = Int.max
                         self.isSetTaskShow.toggle()
                     }, label: {
                         Image(systemName: "plus.circle.fill")
@@ -96,7 +97,7 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $isSetTaskShow){
-            SetTaskView(titleText: $titleText, deleteIndex: $deleteIndex, daySelection: $daySelection)
+            SetTaskView(titleText: $titleText, deleteIndex: $deleteIndex, selectedDay: $daySelection)
                 //モーダルをどこまで表示させるか指定
                 .presentationDetents([.fraction(0.20)])
         }

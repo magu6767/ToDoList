@@ -17,7 +17,7 @@ struct RowView: View {
             Text(data.wrappedTitleText)
 
             HStack {
-                if data.daySelection != "なし"{
+                if data.selectedDay != "なし"{
                     Image(systemName: "calendar")
                     if today == Calendar.current.dateComponents([.year,.month,.day], from: data.wrappedDeadline) {
                         Text("今日")

@@ -17,12 +17,12 @@ extension TaskData {
     }
     @NSManaged public var createdAt: Date?
     @NSManaged public var deadline: Date?
-    @NSManaged public var daySelection: String?
+    @NSManaged public var selectedDay: String?
     @NSManaged public var titleText: String?
     
     public var wrappedcreatedAt: Date {createdAt ?? Date()}
     public var wrappedDeadline: Date {deadline ?? Date()}
-    public var wrappedDaySelection: String {daySelection ?? ""}
+    public var wrappedSelectedDay: String {selectedDay ?? ""}
     public var wrappedTitleText: String {titleText ?? ""}
 
 

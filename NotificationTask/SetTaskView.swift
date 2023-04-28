@@ -13,24 +13,18 @@ struct SetTaskView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
     let days = ["なし","今日","明日","2日後","3日後"]
-    // フォーカスが当たるTextFieldを判断するためのenumを作成
-      enum Field: Hashable {
-          case text
-      }
-    //現在フォーカスしているのが、どのテキストフィールドか（カスタムField型）を定義
-    @FocusState private var focusedField: Field?
+    @FocusState var focus:Bool
     @Binding var titleText: String
     @Binding var deleteIndex: Int
-    @Binding var daySelection: String
+    @Binding var selectedDay: String
 
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                TextField("タイトルを入力", text: $titleText, onCommit: {
-                   taskStart()
-                })
+                TextField("タイトルを入力", text: $titleText)
                     .padding()
-                    .focused($focusedField, equals: .text)
+                    .focused($focus)
+                    .onSubmit { taskStart() }
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard){
                             Button {
@@ -56,7 +50,7 @@ struct SetTaskView: View {
                 Text("いつまでに終わらせる？")
                     .padding(.horizontal, 10)
                     .opacity(0.7)
-                Picker(selection: $daySelection, label: EmptyView()){
+                Picker(selection: $selectedDay, label: EmptyView()){
                     ForEach(days, id: \.self){ day in
                         Text(day)
                     }
@@ -69,7 +63,7 @@ struct SetTaskView: View {
         .onAppear() {
             // 画面を表示してから0.5秒後にキーボードを表示
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                focusedField = .text
+                focus = true
             }
         }
     }
@@ -81,7 +75,7 @@ struct SetTaskView: View {
         //データ保存処理
         viewModel.createdAt = Date()
         viewModel.titleText = titleText
-        viewModel.daySelection = daySelection
+        viewModel.selectedDay = selectedDay
         viewModel.saveData(context: moc)
         titleText = ""
         //通知設定
