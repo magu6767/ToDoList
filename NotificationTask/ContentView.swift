@@ -70,7 +70,7 @@ struct ContentView: View {
                     .onTapGesture {
                         deleteIndex = index
                         titleText = TaskData[index].wrappedTitleText
-                        selectedDay = TaskData[index].wrappedDaySelection
+                        selectedDay = TaskData[index].wrappedSelectedDay
                         self.isSetTaskShow.toggle()
                     }
                 }
