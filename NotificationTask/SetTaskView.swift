@@ -24,7 +24,7 @@ struct SetTaskView: View {
                 TextField("タイトルを入力", text: $titleText)
                     .padding()
                     .focused($focus)
-                    .onSubmit { taskStart() }
+                    .onSubmit { startTask() }
                     .toolbar {
                         ToolbarItemGroup(placement: .keyboard){
                             Button {
@@ -34,7 +34,7 @@ struct SetTaskView: View {
                             }
                             Spacer()
                             Button(action: {
-                                taskStart()
+                                startTask()
                             }, label: {
                                 Text("開始")
                                     .padding(5)
@@ -67,7 +67,7 @@ struct SetTaskView: View {
             }
         }
     }
-    func taskStart() {
+    func startTask() {
         //タスクを変更した場合
         if indexToDelete != Int.max {
             removeRow(index: indexToDelete)
