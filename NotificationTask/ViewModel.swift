@@ -10,7 +10,6 @@ import CoreData
 
 //coreData,通知に関する処理
 class ViewModel: ObservableObject {
-    @Published var shareTaskData: TaskData!
     @Published var createdAt =  Date()
     @Published var selectedDay = "なし"
     @Published var titleText = ""
@@ -22,16 +21,16 @@ class ViewModel: ObservableObject {
     @Published var count = 0
     
     //データ保存処理
-    func saveData(context: NSManagedObjectContext) {
+    func saveTask(context: NSManagedObjectContext) {
         let newData = TaskData(context: context)
         newData.titleText = titleText
-        newData.deadline = Calendar.current.date(byAdding: .day, value: selectByAdding(day: selectedDay), to: Date())
+        newData.deadline = Calendar.current.date(byAdding: .day, value: countByAdding(day: selectedDay), to: Date())
         newData.selectedDay = selectedDay
         newData.createdAt = createdAt
         try? context.save()
     }
     //設定した期限が今日よりどれくらい離れてるかカウント
-    func selectByAdding(day: String) -> Int{
+    func countByAdding(day: String) -> Int{
         let byAdding : Int
         switch day {
         case "今日": byAdding = 0
@@ -65,7 +64,7 @@ class ViewModel: ObservableObject {
         UNUserNotificationCenter.current().add(request)
     }
     //通知
-    func notification() {
+    func notice() {
         let center = UNUserNotificationCenter.current()
         if taskStr != [String]() {
             sendNotificationRequest(notificationHuor: hour, notificationMunite: munite, title: "未完了のやることが"+String(count)+"件あります", body: taskStr.joined(separator: ","), identifier: "固定通知")
@@ -74,12 +73,4 @@ class ViewModel: ObservableObject {
             center.removePendingNotificationRequests(withIdentifiers: ["固定通知"])
         }
     }
-}
-
-struct TaskDataModel: Identifiable {
-    var id =  UUID()
-    @State var createdAt: Date
-    @State var selectedDay: String
-    @State var titleText: String
-    @State var deadline: Date
 }

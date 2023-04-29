@@ -15,7 +15,7 @@ struct SetTaskView: View {
     let days = ["なし","今日","明日","2日後","3日後"]
     @FocusState var focus:Bool
     @Binding var titleText: String
-    @Binding var deleteIndex: Int
+    @Binding var indexToDelete: Int
     @Binding var selectedDay: String
 
     var body: some View {
@@ -69,21 +69,21 @@ struct SetTaskView: View {
     }
     func taskStart() {
         //タスクを変更した場合
-        if deleteIndex != Int.max {
-            rowRemove(index: deleteIndex)
+        if indexToDelete != Int.max {
+            removeRow(index: indexToDelete)
         }
         //データ保存処理
         viewModel.createdAt = Date()
         viewModel.titleText = titleText
         viewModel.selectedDay = selectedDay
-        viewModel.saveData(context: moc)
+        viewModel.saveTask(context: moc)
         titleText = ""
         //通知設定
-        update()
+        updateTask()
         dismiss()
     }
     //行の削除
-    func rowRemove(index: Int) {
+    func removeRow(index: Int) {
         let putRow = TaskData[index]
         moc.delete(putRow)
         do {
@@ -94,9 +94,9 @@ struct SetTaskView: View {
         }
     }
     //通知の更新
-    func update() {
+    func updateTask() {
         viewModel.countTask(datas: TaskData)
-        viewModel.notification()
+        viewModel.notice()
     }
 
 }

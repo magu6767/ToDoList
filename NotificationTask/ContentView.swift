@@ -17,9 +17,8 @@ struct ContentView: View {
     @State var isSetTaskShow = false
     @State var today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
     @State var titleText = ""
-    @State var deleteIndex = Int.max
+    @State var indexToDelete = Int.max
     @State var selectedDay = "なし"
-    @State var checkFlag = false
     //レビュー依頼,フラグ
     @Environment(\.requestReview) var requestReview
     @AppStorage("DidAppStoreReviewRequested") var DidAppStoreReviewRequested = false
@@ -57,8 +56,8 @@ struct ContentView: View {
                     //行の削除
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
-                            rowRemove(index: index)
-                            update()
+                            removeRow(index: index)
+                            updateTask()
                         } label: {
                                 Image(systemName: "checkmark.square")
                                 .resizable()
@@ -68,7 +67,7 @@ struct ContentView: View {
                     //タスクの内容変更
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        deleteIndex = index
+                        indexToDelete = index
                         titleText = TaskData[index].wrappedTitleText
                         selectedDay = TaskData[index].wrappedSelectedDay
                         self.isSetTaskShow.toggle()
@@ -96,7 +95,7 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $isSetTaskShow){
-            SetTaskView(titleText: $titleText, deleteIndex: $deleteIndex, selectedDay: $selectedDay)
+            SetTaskView(titleText: $titleText, indexToDelete: $indexToDelete, selectedDay: $selectedDay)
                 //モーダルをどこまで表示させるか指定
                 .presentationDetents([.fraction(0.20)])
         }
@@ -113,7 +112,7 @@ struct ContentView: View {
         }
     }
     //行の削除
-    func rowRemove(index: Int) {
+    func removeRow(index: Int) {
         let putRow = TaskData[index]
         moc.delete(putRow)
         do {
@@ -122,7 +121,7 @@ struct ContentView: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        deleteIndex = Int.max
+        indexToDelete = Int.max
         //レビューの依頼（一度のみ）
         if DidAppStoreReviewRequested == false {
             requestReview()
@@ -132,9 +131,9 @@ struct ContentView: View {
         }
     }
     //通知の更新
-    func update() {
+    func updateTask() {
         viewModel.countTask(datas: TaskData)
-        viewModel.notification()
+        viewModel.notice()
     }
 }
 

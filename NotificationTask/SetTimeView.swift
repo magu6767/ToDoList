@@ -36,7 +36,7 @@ struct SetTimeView: View {
                     .padding(.trailing, 10)
             }
             Button {
-                updateTime()
+                updateNotificationTime()
             } label: {
                 Text("決定")
                     .fontWeight(.bold)
@@ -51,11 +51,11 @@ struct SetTimeView: View {
             munite = viewModel.munite
         }
     }
-    func updateTime() {
+    func updateNotificationTime() {
         viewModel.hour = hour
         viewModel.munite = munite
         viewModel.countTask(datas: TaskData)
-        viewModel.notification()
+        viewModel.notice()
     }
 }
 //Buttonのアニメーション
