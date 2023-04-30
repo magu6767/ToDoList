@@ -61,9 +61,7 @@ struct SetTaskView: View {
                     
                 }
                 .padding(.horizontal)
-                .padding(.bottom)
-                .background(Color(.systemBackground))
-                
+                .padding(.bottom)                
             }
         }
         .onAppear() {
