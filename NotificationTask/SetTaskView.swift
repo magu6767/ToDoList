@@ -74,41 +74,24 @@ struct SetTaskView: View {
         }
     }
     private func startTask() {
-        //タスクを変更した場合
+        //タスクを変更した場合は元データを削除
         if indexToDelete != Int.max {
-            removeRow(index: indexToDelete)
+            moc.delete(taskData[indexToDelete])
+            do {
+                try moc.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
         }
-        //データ保存処理
+        //データ追加
         viewModel.createdAt = Date()
         viewModel.titleText = titleText
         viewModel.selectedDay = selectedDay
         viewModel.saveTask(context: moc)
         titleText = ""
         //通知設定
-        updateTask()
+        viewModel.updateNotice(tasks: taskData)
         dismiss()
     }
-    //行の削除
-    private func removeRow(index: Int) {
-        let putRow = taskData[index]
-        moc.delete(putRow)
-        do {
-            try moc.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    }
-    //通知の更新
-    private func updateTask() {
-        viewModel.countTask(datas: taskData)
-        viewModel.notice()
-    }
-    
 }
-
-//struct SetTaskView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SetTaskView()
-//    }
-//}

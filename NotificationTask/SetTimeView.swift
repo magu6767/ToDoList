@@ -54,8 +54,7 @@ struct SetTimeView: View {
     private func updateNotificationTime() {
         viewModel.hour = hour
         viewModel.munite = munite
-        viewModel.countTask(datas: taskData)
-        viewModel.notice()
+        viewModel.updateNotice(tasks: taskData)
     }
 }
 //Buttonのアニメーション

@@ -57,7 +57,7 @@ struct ContentView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             removeRow(index: index)
-                            updateTask()
+                            viewModel.updateNotice(tasks: taskData)
                         } label: {
                             Image(systemName: "checkmark.square")
                                 .resizable()
@@ -113,8 +113,7 @@ struct ContentView: View {
     }
     //行の削除
     private func removeRow(index: Int) {
-        let putRow = taskData[index]
-        moc.delete(putRow)
+        moc.delete(taskData[index])
         do {
             try moc.save()
         } catch {
@@ -129,11 +128,6 @@ struct ContentView: View {
         } else{
             return
         }
-    }
-    //通知の更新
-    private func updateTask() {
-        viewModel.countTask(datas: taskData)
-        viewModel.notice()
     }
 }
 
