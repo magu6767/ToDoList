@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct SetTaskView: View {
-    @ObservedObject var viewModel =  ViewModel()
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]) var TaskData: FetchedResults<TaskData>
-    @Environment(\.managedObjectContext) var moc
+    @ObservedObject private var viewModel =  ViewModel()
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TaskData.createdAt, ascending: false)]) private var taskData: FetchedResults<TaskData>
+    @Environment(\.managedObjectContext) private var moc
     @Environment(\.dismiss) private var dismiss
-    let days = ["なし","今日","明日","2日後","3日後"]
-    @FocusState var focus:Bool
+    private let days = ["なし","今日","明日","2日後","3日後"]
+    @FocusState private var focus:Bool
     @Binding var titleText: String
     @Binding var indexToDelete: Int
     @Binding var selectedDay: String
-
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -25,28 +25,6 @@ struct SetTaskView: View {
                     .padding()
                     .focused($focus)
                     .onSubmit { startTask() }
-                    .toolbar {
-                        ToolbarItemGroup(placement: .keyboard){
-                            Button {
-                                dismiss()
-                            } label: {
-                                Text("閉じる")
-                            }
-                            Spacer()
-                            Button(action: {
-                                startTask()
-                            }, label: {
-                                Text("開始")
-                                    .padding(5)
-                                    .foregroundColor(.white)
-                                    .background(Color("AccentColor"))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color("AccentColor"), lineWidth: 2)
-                                    )
-                            })
-                        }
-                    }
                 Text("いつまでに終わらせる？")
                     .padding(.horizontal, 10)
                     .opacity(0.7)
@@ -55,9 +33,37 @@ struct SetTaskView: View {
                         Text(day)
                     }
                 }
-                .padding(.horizontal, 10)
+                .padding(.horizontal)
                 .pickerStyle(.segmented)
                 Spacer()
+                
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("閉じる")
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        startTask()
+                    }) {
+                        Text("開始")
+                            .padding(5)
+                            .foregroundColor(.white)
+                            .background(Color("AccentColor"))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color("AccentColor"), lineWidth: 2)
+                            )
+                    }
+                    
+                }
+                .padding(.horizontal)
+                .padding(.bottom)
+                .background(Color(.systemBackground))
+                
             }
         }
         .onAppear() {
@@ -67,7 +73,7 @@ struct SetTaskView: View {
             }
         }
     }
-    func startTask() {
+    private func startTask() {
         //タスクを変更した場合
         if indexToDelete != Int.max {
             removeRow(index: indexToDelete)
@@ -83,8 +89,8 @@ struct SetTaskView: View {
         dismiss()
     }
     //行の削除
-    func removeRow(index: Int) {
-        let putRow = TaskData[index]
+    private func removeRow(index: Int) {
+        let putRow = taskData[index]
         moc.delete(putRow)
         do {
             try moc.save()
@@ -94,11 +100,11 @@ struct SetTaskView: View {
         }
     }
     //通知の更新
-    func updateTask() {
-        viewModel.countTask(datas: TaskData)
+    private func updateTask() {
+        viewModel.countTask(datas: taskData)
         viewModel.notice()
     }
-
+    
 }
 
 //struct SetTaskView_Previews: PreviewProvider {

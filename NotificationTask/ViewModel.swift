@@ -13,12 +13,12 @@ class ViewModel: ObservableObject {
     @Published var createdAt =  Date()
     @Published var selectedDay = "なし"
     @Published var titleText = ""
-    @Published var today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
+    private let today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
     //全てのタスク
-    @Published var taskStr = [String]()
+    private var taskStr = [String]()
     @AppStorage("munite") var munite = 0
     @AppStorage("hour") var hour = 7
-    @Published var count = 0
+    private var count = 0
     
     //データ保存処理
     func saveTask(context: NSManagedObjectContext) {
@@ -74,3 +74,4 @@ class ViewModel: ObservableObject {
         }
     }
 }
+
