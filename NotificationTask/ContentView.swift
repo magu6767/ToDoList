@@ -9,18 +9,18 @@ import SwiftUI
 import CoreData
 import StoreKit
 
+
 struct ContentView: View {
-    let persistenceController = PersistenceController.shared
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]) var TaskData: FetchedResults<TaskData>
+    private let persistenceController = PersistenceController.shared
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TaskData.createdAt, ascending: false)]) private var taskData: FetchedResults<TaskData>
     @Environment(\.managedObjectContext) var moc
-    @ObservedObject var viewModel = ViewModel()
+    @ObservedObject private var viewModel = ViewModel()
     @State var isSetTaskShow = false
-    @State var today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
-    @State var titleText = ""
-    @State var indexToDelete = Int.max
-    @State var selectedDay = "なし"
+    @State private var selectedDay = "なし"
+    @State private var titleText = ""
+    @State private var indexToDelete = Int.max
     //レビュー依頼,フラグ
-    @Environment(\.requestReview) var requestReview
+    @Environment(\.requestReview) private var requestReview
     @AppStorage("DidAppStoreReviewRequested") var DidAppStoreReviewRequested = false
     @FocusState private var focusedField: Bool
     init(){
@@ -46,9 +46,9 @@ struct ContentView: View {
         //追加ボタンは重ねて表示
         ZStack {
             List{
-                ForEach(TaskData.indices, id: \.self){ index in
+                ForEach(taskData.indices, id: \.self){ index in
                     HStack {
-                        RowView(data: Binding.constant(TaskData[index]))
+                        RowView(data: Binding.constant(taskData[index]))
                         Spacer()
                         Image(systemName: "arrowshape.left")
                             .foregroundColor(Color("MainColor"))
@@ -57,9 +57,9 @@ struct ContentView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             removeRow(index: index)
-                            updateTask()
+                            viewModel.updateNotice(tasks: taskData)
                         } label: {
-                                Image(systemName: "checkmark.square")
+                            Image(systemName: "checkmark.square")
                                 .resizable()
                                 .scaledToFit()
                         }.tint(Color("AccentColor"))
@@ -68,8 +68,8 @@ struct ContentView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         indexToDelete = index
-                        titleText = TaskData[index].wrappedTitleText
-                        selectedDay = TaskData[index].wrappedSelectedDay
+                        titleText = taskData[index].wrappedTitleText
+                        selectedDay = taskData[index].wrappedSelectedDay
                         self.isSetTaskShow.toggle()
                     }
                 }
@@ -96,7 +96,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $isSetTaskShow){
             SetTaskView(titleText: $titleText, indexToDelete: $indexToDelete, selectedDay: $selectedDay)
-                //モーダルをどこまで表示させるか指定
+            //モーダルをどこまで表示させるか指定
                 .presentationDetents([.fraction(0.20)])
         }
         .navigationTitle("やることリスト")
@@ -112,9 +112,8 @@ struct ContentView: View {
         }
     }
     //行の削除
-    func removeRow(index: Int) {
-        let putRow = TaskData[index]
-        moc.delete(putRow)
+    private func removeRow(index: Int) {
+        moc.delete(taskData[index])
         do {
             try moc.save()
         } catch {
@@ -129,11 +128,6 @@ struct ContentView: View {
         } else{
             return
         }
-    }
-    //通知の更新
-    func updateTask() {
-        viewModel.countTask(datas: TaskData)
-        viewModel.notice()
     }
 }
 

@@ -10,7 +10,7 @@ import CoreData
 
 struct RowView: View {
     @Binding var data: FetchedResults<TaskData>.Element
-    @State var today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
+    @State private var today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
     
     var body: some View {
         VStack(alignment: .leading){
@@ -24,21 +24,21 @@ struct RowView: View {
                     }else {
                         //期限が過ぎてたら赤字で表示
                         Text(formatDate(date: data.wrappedDeadline))
-                            .foregroundColor(isOver?(date: data.wrappedDeadline) ? .red : .black)
+                            .foregroundColor(isOver(date: data.wrappedDeadline) ? .red : .black)
                     }
                 }
             }
             .opacity(0.5)
         }
     }
-    func formatDate(date: Date) -> String {
+    private func formatDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateStyle = .medium
         dateFormatter.dateFormat = "M月dd日(EEEEE)"
         return dateFormatter.string(from: date)
     }
-    func isOver?(date: Date) -> Bool{
+    private func isOver(date: Date) -> Bool{
         //dateComponentsは等比較しかできないので、日付が違うのを確認してDate型でも比較
         if today != Calendar.current.dateComponents([.year,.month,.day], from: date) && Date() > date{
             return true

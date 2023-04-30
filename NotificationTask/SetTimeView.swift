@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SetTimeView: View {
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]) var TaskData: FetchedResults<TaskData>
-    @ObservedObject var viewModel =  ViewModel()
-    @State var hour = 7
-    @State var munite = 0
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TaskData.createdAt, ascending: false)]) private var taskData: FetchedResults<TaskData>
+    @ObservedObject private var viewModel =  ViewModel()
+    @State private var hour = 7
+    @State private var munite = 0
 
     var body: some View {
         VStack {
@@ -51,11 +51,10 @@ struct SetTimeView: View {
             munite = viewModel.munite
         }
     }
-    func updateNotificationTime() {
+    private func updateNotificationTime() {
         viewModel.hour = hour
         viewModel.munite = munite
-        viewModel.countTask(datas: TaskData)
-        viewModel.notice()
+        viewModel.updateNotice(tasks: taskData)
     }
 }
 //Buttonのアニメーション
