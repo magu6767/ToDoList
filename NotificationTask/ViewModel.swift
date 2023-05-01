@@ -47,7 +47,7 @@ final class Notification {
     @AppStorage("hour") var hour = 7
     
     //通知
-    func updateNotice(tasks: FetchedResults<TaskData>) {
+    func updateNotification(tasks: FetchedResults<TaskData>) {
         let center = UNUserNotificationCenter.current()
         
         if tasks.isEmpty {
