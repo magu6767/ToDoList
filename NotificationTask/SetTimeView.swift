@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SetTimeView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TaskData.createdAt, ascending: false)]) private var taskData: FetchedResults<TaskData>
-    @ObservedObject private var viewModel =  ViewModel()
+    private var notification =  Notification()
     @State private var hour = 7
     @State private var munite = 0
 
@@ -17,7 +17,7 @@ struct SetTimeView: View {
         VStack {
             Text("通知する時間")
                 .padding()
-            Text(String(viewModel.hour) + " 時 " + String(viewModel.munite) + " 分")
+            Text(String(notification.hour) + " 時 " + String(notification.munite) + " 分")
             HStack {
                 Picker(selection: $hour, label: Text("")) {
                     ForEach(0..<24) { hour in
@@ -47,14 +47,14 @@ struct SetTimeView: View {
         .navigationTitle("通知設定")
         .onAppear{
             //初期表示の設定
-            hour = viewModel.hour
-            munite = viewModel.munite
+            hour = notification.hour
+            munite = notification.munite
         }
     }
     private func updateNotificationTime() {
-        viewModel.hour = hour
-        viewModel.munite = munite
-        viewModel.updateNotice(tasks: taskData)
+        notification.hour = hour
+        notification.munite = munite
+        notification.updateNotice(tasks: taskData)
     }
 }
 //Buttonのアニメーション

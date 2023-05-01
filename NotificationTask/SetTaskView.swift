@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SetTaskView: View {
-    @ObservedObject private var viewModel =  ViewModel()
+    @ObservedObject private var dataControl =  DataControl()
+    private var notification = Notification()
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TaskData.createdAt, ascending: false)]) private var taskData: FetchedResults<TaskData>
     @Environment(\.managedObjectContext) private var moc
     @Environment(\.dismiss) private var dismiss
@@ -17,7 +18,11 @@ struct SetTaskView: View {
     @Binding var titleText: String
     @Binding var indexToDelete: Int
     @Binding var selectedDay: String
-    
+    init(titleText: Binding<String>, indexToDelete: Binding<Int>, selectedDay: Binding<String>) {
+        _titleText = titleText
+        _indexToDelete = indexToDelete
+        _selectedDay = selectedDay
+    }
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -36,7 +41,6 @@ struct SetTaskView: View {
                 .padding(.horizontal)
                 .pickerStyle(.segmented)
                 Spacer()
-                
                 HStack {
                     Button(action: {
                         dismiss()
@@ -64,12 +68,7 @@ struct SetTaskView: View {
                 .padding(.bottom)                
             }
         }
-        .onAppear() {
-            // 画面を表示してから0.5秒後にキーボードを表示
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                focus = true
-            }
-        }
+        .onAppear() { focus = true }
     }
     private func startTask() {
         //タスクを変更した場合は元データを削除
@@ -83,13 +82,13 @@ struct SetTaskView: View {
             }
         }
         //データ追加
-        viewModel.createdAt = Date()
-        viewModel.titleText = titleText
-        viewModel.selectedDay = selectedDay
-        viewModel.saveTask(context: moc)
+        dataControl.createdAt = Date()
+        dataControl.titleText = titleText
+        dataControl.selectedDay = selectedDay
+        dataControl.saveTask(context: moc)
         titleText = ""
         //通知設定
-        viewModel.updateNotice(tasks: taskData)
+        notification.updateNotice(tasks: taskData)
         dismiss()
     }
 }
