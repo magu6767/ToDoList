@@ -9,11 +9,11 @@ import CoreData
 
 //coreData,通知に関する処理
 class ViewModel: ObservableObject {
+    private let identifier = "固定通知"
+    private let today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
     @Published var createdAt =  Date()
     @Published var selectedDay = "なし"
     @Published var titleText = ""
-    private let identifier = "固定通知"
-    private let today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
     @AppStorage("munite") var munite = 0
     @AppStorage("hour") var hour = 7
     
@@ -40,7 +40,7 @@ class ViewModel: ObservableObject {
     }
 
     //通知
-    func updateNotice(tasks: FetchedResults<TaskData>) {
+    func updateNotification(tasks: FetchedResults<TaskData>) {
         let center = UNUserNotificationCenter.current()
         
         if tasks.isEmpty {

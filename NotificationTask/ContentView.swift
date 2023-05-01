@@ -57,7 +57,7 @@ struct ContentView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             removeRow(index: index)
-                            viewModel.updateNotice(tasks: taskData)
+                            viewModel.updateNotification(tasks: taskData)
                         } label: {
                             Image(systemName: "checkmark.square")
                                 .resizable()
@@ -130,23 +130,6 @@ struct ContentView: View {
         }
     }
 }
-
-//チェックボタンのスタイル
-struct CheckBoxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        Button {
-            configuration.isOn.toggle()
-        } label: {
-            HStack {
-                configuration.label
-                Spacer()
-                Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "checkmark.circle.fill")
-                    .foregroundColor(configuration.isOn ? .gray : .green)
-            }
-        }
-    }
-}
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

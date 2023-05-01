@@ -89,7 +89,7 @@ struct SetTaskView: View {
         viewModel.saveTask(context: moc)
         titleText = ""
         //通知設定
-        viewModel.updateNotice(tasks: taskData)
+        viewModel.updateNotification(tasks: taskData)
         dismiss()
     }
 }
