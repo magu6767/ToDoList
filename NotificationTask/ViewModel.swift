@@ -8,14 +8,10 @@ import SwiftUI
 import CoreData
 
 //coreData,通知に関する処理
-class ViewModel: ObservableObject {
-    private let identifier = "固定通知"
-    private let today = Calendar.current.dateComponents([.year,.month,.day], from: Date())
+final class DataControl: ObservableObject {
     @Published var createdAt =  Date()
     @Published var selectedDay = "なし"
     @Published var titleText = ""
-    @AppStorage("munite") var munite = 0
-    @AppStorage("hour") var hour = 7
     
     //データ保存処理
     func saveTask(context: NSManagedObjectContext) {
@@ -24,7 +20,12 @@ class ViewModel: ObservableObject {
         newData.deadline = Calendar.current.date(byAdding: .day, value: countDaysToDeadline(day: selectedDay), to: Date())
         newData.selectedDay = selectedDay
         newData.createdAt = createdAt
-        try? context.save()
+        do {
+            try context.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
     //設定した期限が今日よりどれくらい離れてるかカウント
     func countDaysToDeadline(day: String) -> Int{
@@ -38,7 +39,13 @@ class ViewModel: ObservableObject {
         }
         return byAdding
     }
+}
 
+final class Notification {
+    private let identifier = "固定通知"
+    @AppStorage("munite") var munite = 0
+    @AppStorage("hour") var hour = 7
+    
     //通知
     func updateNotification(tasks: FetchedResults<TaskData>) {
         let center = UNUserNotificationCenter.current()

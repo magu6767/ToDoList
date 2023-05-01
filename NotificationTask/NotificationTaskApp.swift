@@ -16,7 +16,7 @@ struct NotificationTaskApp: App {
             NavigationView{
                 ContentView()
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .environmentObject(ViewModel())
+                    .environmentObject(DataControl())
             }
         }
     }

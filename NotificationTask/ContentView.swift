@@ -9,12 +9,12 @@ import SwiftUI
 import CoreData
 import StoreKit
 
-
 struct ContentView: View {
     private let persistenceController = PersistenceController.shared
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TaskData.createdAt, ascending: false)]) private var taskData: FetchedResults<TaskData>
     @Environment(\.managedObjectContext) var moc
-    @ObservedObject private var viewModel = ViewModel()
+    private var dataControl = DataControl()
+    private var notification = Notification()
     @State var isSetTaskShow = false
     @State private var selectedDay = "なし"
     @State private var titleText = ""
@@ -57,7 +57,7 @@ struct ContentView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             removeRow(index: index)
-                            viewModel.updateNotification(tasks: taskData)
+                            notification.updateNotice(tasks: taskData)
                         } label: {
                             Image(systemName: "checkmark.square")
                                 .resizable()
