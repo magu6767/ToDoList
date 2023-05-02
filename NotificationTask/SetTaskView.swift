@@ -65,7 +65,7 @@ struct SetTaskView: View {
                     
                 }
                 .padding(.horizontal)
-                .padding(.bottom)                
+                .padding(.bottom)
             }
         }
         .onAppear() { focus = true }
@@ -88,7 +88,7 @@ struct SetTaskView: View {
         dataControl.saveTask(context: moc)
         titleText = ""
         //通知設定
-        notification.updateNotice(tasks: taskData)
+        notification.updateNotification(tasks: taskData)
         dismiss()
     }
 }

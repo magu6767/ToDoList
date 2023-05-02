@@ -31,11 +31,10 @@ final class DataControl: ObservableObject {
     func countDaysToDeadline(day: String) -> Int{
         let byAdding : Int
         switch day {
-        case "今日": byAdding = 0
         case "明日": byAdding = 1
         case "2日後": byAdding = 2
         case "3日後": byAdding = 3
-        default: byAdding = 99999
+        default: byAdding = 0
         }
         return byAdding
     }

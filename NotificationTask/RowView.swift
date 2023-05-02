@@ -15,7 +15,7 @@ struct RowView: View {
     var body: some View {
         VStack(alignment: .leading){
             Text(data.wrappedTitleText)
-
+            
             HStack {
                 if data.selectedDay != "なし"{
                     Image(systemName: "calendar")
