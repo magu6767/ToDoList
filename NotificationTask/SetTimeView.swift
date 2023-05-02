@@ -12,7 +12,7 @@ struct SetTimeView: View {
     private var notification =  Notification()
     @State private var hour = 7
     @State private var munite = 0
-
+    
     var body: some View {
         VStack {
             Text("通知する時間")
@@ -54,7 +54,7 @@ struct SetTimeView: View {
     private func updateNotificationTime() {
         notification.hour = hour
         notification.munite = munite
-        notification.updateNotice(tasks: taskData)
+        notification.updateNotification(tasks: taskData)
     }
 }
 //Buttonのアニメーション

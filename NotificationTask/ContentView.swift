@@ -57,7 +57,7 @@ struct ContentView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             removeRow(index: index)
-                            notification.updateNotice(tasks: taskData)
+                            notification.updateNotification(tasks: taskData)
                         } label: {
                             Image(systemName: "checkmark.square")
                                 .resizable()
@@ -103,7 +103,7 @@ struct ContentView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: SetTimeView()            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                NavigationLink(destination: SetTimeView().environment(\.managedObjectContext, persistenceController.container.viewContext)
                                , label: {
                     Image(systemName: "bell.fill")
                         .foregroundColor(Color("AccentColor"))
@@ -125,8 +125,6 @@ struct ContentView: View {
         if DidAppStoreReviewRequested == false {
             requestReview()
             DidAppStoreReviewRequested = true
-        } else{
-            return
         }
     }
 }
