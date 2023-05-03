@@ -103,7 +103,7 @@ struct ContentView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: SetTimeView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+                NavigationLink(destination: SetTimeView(hour: notification.hour, munite: notification.munite).environment(\.managedObjectContext, persistenceController.container.viewContext)
                                , label: {
                     Image(systemName: "bell.fill")
                         .foregroundColor(Color("AccentColor"))
