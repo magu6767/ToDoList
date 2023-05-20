@@ -94,7 +94,9 @@ struct ContentView: View {
                 }
             }
         }
-        .sheet(isPresented: $isSetTaskShow){
+        .sheet(isPresented: $isSetTaskShow, onDismiss: {
+            indexToDelete = Int.max
+        }){
             SetTaskView(titleText: $titleText, indexToDelete: $indexToDelete, selectedDay: $selectedDay)
             //モーダルをどこまで表示させるか指定
                 .presentationDetents([.fraction(0.20)])
@@ -120,7 +122,6 @@ struct ContentView: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        indexToDelete = Int.max
         //レビューの依頼（一度のみ）
         if DidAppStoreReviewRequested == false {
             requestReview()
