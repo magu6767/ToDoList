@@ -30,6 +30,31 @@ struct SetTaskView: View {
                     .padding()
                     .focused($focus)
                     .onSubmit { startTask() }
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                                Button(action: {
+                                    dismiss()
+                                }) {
+                                    Text("閉じる")
+                                }
+                                
+                                
+                                Button(action: {
+                                    startTask()
+                                }) {
+                                    Text("開始")
+                                        .padding(5)
+                                        .foregroundColor(.white)
+                                        .background(Color("AccentColor"))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .stroke(Color("AccentColor"), lineWidth: 2)
+                                        )
+                                }
+                                
+                            
+                        }
+                    }
                 Text("いつまでに終わらせる？")
                     .padding(.horizontal, 10)
                     .opacity(0.7)
@@ -40,32 +65,6 @@ struct SetTaskView: View {
                 }
                 .padding(.horizontal)
                 .pickerStyle(.segmented)
-                Spacer()
-                HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("閉じる")
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        startTask()
-                    }) {
-                        Text("開始")
-                            .padding(5)
-                            .foregroundColor(.white)
-                            .background(Color("AccentColor"))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color("AccentColor"), lineWidth: 2)
-                            )
-                    }
-                    
-                }
-                .padding(.horizontal)
-                .padding(.bottom)
             }
         }
         .onAppear() { focus = true }

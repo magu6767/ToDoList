@@ -7,7 +7,6 @@
 import SwiftUI
 import CoreData
 
-//coreData,通知に関する処理
 final class DataControl: ObservableObject {
     @Published var createdAt =  Date()
     @Published var selectedDay = "なし"
